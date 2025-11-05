@@ -56,17 +56,6 @@ def get_company_overview(stock: str) -> dict:
 
     return retrieve_from_endpoint(url)
 
-@tool
-def get_subsectors() -> dict:
-    """
-    Return a list of  available subsectors
-    
-    @return: The list of available subsectors
-    """
-
-    url = f"https://api.sectors.app/v1/subsectors/"
-
-    return retrieve_from_endpoint(url)
 
 @tool
 def get_company_revenue_cost_segments(stock : str) -> dict :
@@ -136,7 +125,7 @@ def get_top_companies_by_growth(dimension : str, sub_sectors : str) -> dict :
 
     @param dimension : The dimension to rank the companies by, one of: 
     top_earnings_growth_gainers, top_earnings_growth_losers, top_revenue_growth_gainers, top_revenue_growth_losers.
-    @param sub_sectors : use get_company_overview tools to get the subsectors of the company, if not provided just leave it blank or suggest a list from get_subsectors tool
+    @param sub_sectors : use get_company_overview tools to get the subsectors of the company, if not provided just leave it blank
     """
 
     url = f"https://api.sectors.app/v1/companies/top-growth/?classifications={dimension}&n_stock=5&sub_sector={sub_sectors}"
@@ -153,7 +142,7 @@ def get_top_companies_by_mover(dimension : str, period : str, sub_sectors : str)
     (top_gainers, top_losers)
     @param period : The certain period, one of:
     (1d, 7d, 14d, 30d, 365d)
-    @param sub_sectors : use get_company_overview tools to get the subsectors of the company, if not provided just leave it blank or suggest a list from get_subsectors tool
+    @param sub_sectors : use get_company_overview tools to get the subsectors of the company, if not provided just leave it blank
     """
 
     url = f"https://api.sectors.app/v1/companies/top-changes/?classifications={dimension}&n_stock=5&periods={period}&sub_sector={sub_sectors}"
@@ -169,9 +158,7 @@ def get_finance_agent():
         get_daily_tx,
         get_top_companies_ranked,
         get_top_companies_by_growth,
-        get_top_companies_by_mover,
-        get_company_revenue_cost_segments,
-        get_subsectors
+        get_top_companies_by_mover
     ]
 
     # Create the Prompt Template
